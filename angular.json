@@ -23,9 +23,17 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap-theme.min.css",
+              "src/assets/convjs/jquery.convform.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",             
+              "src/assets/convjs/autosize.min.js",
+              "src/assets/convjs/jquery.convform.js"
+            ]
           },
           "configurations": {
             "production": {

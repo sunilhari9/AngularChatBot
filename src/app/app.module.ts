@@ -2,10 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { ChatbotComponent } from './chatbot/chatbot.component';
+import * as $ from 'jquery';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ChatbotComponent
   ],
   imports: [
     BrowserModule

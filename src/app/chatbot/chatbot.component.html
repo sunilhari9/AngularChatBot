@@ -1,0 +1,32 @@
+<img src="assets/images/bot.gif" (click)="chat()" width="200px" class="chatbot hideBot">
+
+<!-- <div class="row">
+    <div class="col-md-8">
+     
+    </div>
+    <div class="col-md-4"><button type="button" class="btn btn-default" >
+        <span class="glyphicon glyphicon-remove " aria-hidden="true"></span>
+      </button>
+    </div>
+  </div> -->
+<div class="panel panel-primary chatBox chatbot col-sm-3 col-sm-offset-4 frame ">
+  <div class="panel-heading">Chat Window <span class="glyphicon glyphicon-remove pull-right" (click)="closeChat()"
+      aria-hidden="true"></span>
+    </div>
+  <div class="panel-body">
+    <div class="">
+      <ul id="msg"></ul>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <!-- <div class="inputarea">
+      <div class="msj-rta macro" style="margin:auto">
+      
+      </div>
+    </div> -->
+    <div class="text text-r" style="background:whitesmoke !important">
+        <input class="mytext" placeholder="Type a message" (keyup.enter)="onKey($event)" />
+      </div>
+  </div>
+
+</div>
