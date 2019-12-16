@@ -20,10 +20,15 @@
           <div [className]="msg.who==='bot' ? 'macro msj-rta' : 'macro msj'">
             <div class="avatar"><img class="img-circle" style="width:100%;" [src]="msg.avatar" /></div>
             <div class="text text-l">
-              <p> {{msg.text}} </p>
-              <div *ngIf="msg.questions">
-                  <a *ngFor="let question of msg.questions" class="btn pull-left" href="#" (click)="requested('me',question,100)" role="button">{{question}}</a>
+              <p class="lead"> {{msg.text}} </p>
+              <div *ngIf="msg.type=='list'" class="list panel-body">
+                <p class="text-muted" *ngFor="let listItems of msg.list">{{listItems}}</p>
               </div>
+              <div *ngIf="msg.questions" class="list">
+                <a *ngFor="let question of msg.questions" href="#"
+                  (click)="requested('me',question,100)" role="button">{{question}}</a>
+              </div>
+
               <p><small> {{msg.time}} </small></p>
             </div>
           </div>
@@ -37,8 +42,8 @@
       
       </div>
     </div> -->
-    <div class="text text-r" style="background:whitesmoke !important"  *ngIf="msgInput">
-        <input class="mytext" placeholder="Type a message" (keyup.enter)="onKey($event)" />
+    <div class="text text-r" style="background:whitesmoke !important" *ngIf="msgInput">
+      <input class="mytext" placeholder="Enter Here" (keyup.enter)="onKey($event)" />
     </div>
   </div>
 

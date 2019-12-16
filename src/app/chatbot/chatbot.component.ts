@@ -11,8 +11,8 @@ export class ChatbotComponent implements OnInit {
   title = 'IPM CHAT POC';
 
   me = { avatar: "assets/images/me.png" };
-  msgInput=false;
-  bot = { avatar: "assets/images/bot.png" };
+  msgInput = false;
+  bot = { avatar: "assets/images/chatBotIcon.png" };
   chatMsgs: Array<object> = [];
 
   constructor() { }
@@ -25,7 +25,8 @@ export class ChatbotComponent implements OnInit {
     $(".chatBox").show(1000);
     $(".hideBot").hide();
     this.resetChat();
-    this.insertChat("bot", "Hello Suneel, Please choos any of the below options.", 1000, ["Whats your Name.", "Whats your Profession.","My Order details.","No answer"]);
+    this.insertChat("bot", "Hello Suneel, Its 32 \xB0C Altanta.",100);
+    this.insertChat("bot", "What can I do for you Today?", 1000, ["Get my critical parameter.", "What are my today’s action items.", "Maintenance due this week.", "My work orders.", "No answer"]);
   }
   closeChat() {
     $(".chatBox").hide(1000);
@@ -44,25 +45,33 @@ export class ChatbotComponent implements OnInit {
   //-- No use time. It is a javaScript effect.
   requested(who, text, time: any = 0) {
     var that = this;
-    this.insertChat(who, text+"?", time);
+    this.insertChat(who, text, time);
     this.msgInput = false;
     switch (text) {
-      case "Whats your Name.":
-        this.insertChat("bot", "I AM your Personal Bot", 1000);
+      case "What are my today’s action items.":
+        this.insertChat("bot", "Please wait a moment its still progress", 1000);
         break;
-      case "Whats your Profession.":
-        this.insertChat("bot", "Helping you.. :-)", 1000);
+      case "Get my critical parameter.":
+        this.insertList("Its always a good idea to use critical parameter .here are your action items.", ["1) Call Customer", "2) Get my work done"], ["OK","Close"]);
         break;
-      case "My Order details.":
-          this.insertChat("bot", "Please enter Order Number", 1000);
-          this.msgInput = true;
-          break;
+      case "Maintenance due this week.":
+        this.insertList("On time maintenance can save lot of money.here on your maintenance task for this week.", ["1) Fix Bugs", "2) Call Police"], ["OK","Close"]);
+        break;
+      case "My work orders.":
+        this.insertChat("bot", "Please enter Order Number", 100);
+        this.msgInput = true;
+        break;
+      case "OK":
+        this.insertChat("bot", "Do you want to", 100,["Continue","Close"]);
+        break;
+      case "Close":
+         this.closeChat();
       default:
-        this.insertChat("bot", "I cant find that please choose bellow", 1000, ["Whats your Name.", "Whats your Profession.","My Order details."]);
+        this.insertChat("bot", "Please choose from List.", 1000, ["Get my critical parameter.", "What are my today’s action items.", "Maintenance due this week.", "My work orders."]);
     }
   }
   insertChat(who, text, delay: any = 0, questions = null) {
-    var control = "";
+
     var date = this.formatAMPM(new Date());
     let that = this;
     setTimeout(
@@ -82,6 +91,15 @@ export class ChatbotComponent implements OnInit {
 
       }, delay);
   }
+
+  insertList(text, list, questions, delay: any = 1000) {
+    let that = this;
+    var date = this.formatAMPM(new Date());
+    setTimeout(function () {
+      that.chatMsgs.push({ avatar: that.bot.avatar, who: "bot", text: text, time: date, type: "list", list: list, questions: questions });
+    }, delay);
+  }
+
   resetChat() {
     this.chatMsgs = [];
   }

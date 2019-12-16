@@ -8,7 +8,7 @@
     width:100%;
 }
 .text > p:first-of-type{
-    width:100%;margin-top:0;margin-bottom:auto;line-height: 13px;font-size: 12px;
+    width:100%;margin-top:0;margin-bottom:auto;line-height: 13px;font-size: 14px;
     text-align: left;
 }
 .text > p:last-of-type{
@@ -19,6 +19,11 @@
 }        
 .text-r{
     float:right;padding-left:10px;
+}
+.list{
+    display: inline-grid;
+    text-align: left;
+    padding-top: 1rem;
 }
 .avatar{
     display:flex;
