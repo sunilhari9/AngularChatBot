@@ -8,11 +8,20 @@
     width:100%;
 }
 .text > p:first-of-type{
-    width:100%;margin-top:0;margin-bottom:auto;line-height: 13px;font-size: 14px;
+    width:100%;margin-top:2rem;margin-bottom:2rem;line-height: 13px;font-size: 14px;
     text-align: left;
 }
+.question{
+    color: #007bff !important;
+}
+.question:hover{
+    text-decoration: underline !important;
+}
+button.btn{
+    margin: 1px;;
+}
 .text > p:last-of-type{
-    width:100%;text-align:right;color:silver;margin-bottom:-7px;margin-top:auto;
+    width:100%;text-align:right;color:silver;margin-bottom:0rem;margin-top:auto;
 }
 .text-l{
     float:left;padding-right:10px;
@@ -90,7 +99,7 @@ input:focus{
     padding-bottom: 10%;
     padding-top: 10%;
     z-index: -1;
-    max-height: 80vh;
+    height: 60vh;
     overflow-x: hidden;
 } 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
