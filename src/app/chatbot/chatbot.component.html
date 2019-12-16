@@ -12,10 +12,23 @@
 <div class="panel panel-primary chatBox chatbot col-sm-3 col-sm-offset-4 frame ">
   <div class="panel-heading">Chat Window <span class="glyphicon glyphicon-remove pull-right" (click)="closeChat()"
       aria-hidden="true"></span>
-    </div>
+  </div>
   <div class="panel-body">
     <div class="">
-      <ul id="msg"></ul>
+      <ul id="msg">
+        <li style="width:100%" *ngFor="let msg of chatMsgs">
+          <div [className]="msg.who==='bot' ? 'macro msj-rta' : 'macro msj'">
+            <div class="avatar"><img class="img-circle" style="width:100%;" [src]="msg.avatar" /></div>
+            <div class="text text-l">
+              <p> {{msg.text}} </p>
+              <div *ngIf="msg.questions">
+                  <a *ngFor="let question of msg.questions" class="btn" href="#" (click)="requested('me',question,100)" role="button">{{question}}</a>
+              </div>
+              <p><small> {{msg.time}} </small></p>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
   <div class="panel-footer">
@@ -25,8 +38,8 @@
       </div>
     </div> -->
     <div class="text text-r" style="background:whitesmoke !important">
-        <input class="mytext" placeholder="Type a message" (keyup.enter)="onKey($event)" />
-      </div>
+      <input class="mytext" placeholder="Type a message" (keyup.enter)="onKey($event)" />
+    </div>
   </div>
 
 </div>
