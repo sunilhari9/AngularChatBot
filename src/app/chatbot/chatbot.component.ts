@@ -10,22 +10,22 @@ declare var $: any;
 export class ChatbotComponent implements OnInit {
   title = 'IPM CHAT POC';
 
-  me = { avatar: "assets/images/me.png"};
-
+  me = { avatar: "assets/images/me.png" };
+  msgInput=false;
   bot = { avatar: "assets/images/bot.png" };
   chatMsgs: Array<object> = [];
 
-  constructor() {}
-  ngOnInit() {}
+  constructor() { }
+  ngOnInit() { }
   onKey(event: any) { // without type info
-    this.insertChat("me", event.target.value, this.formatAMPM(new Date()));
+    this.requested("me", event.target.value, this.formatAMPM(new Date()));
     event.target.value = "";
   }
   chat() {
     $(".chatBox").show(1000);
     $(".hideBot").hide();
-    this.resetChat();  
-    this.insertChat("bot", "Hello Suneel, Please choos any of the below options.", 1000);
+    this.resetChat();
+    this.insertChat("bot", "Hello Suneel, Please choos any of the below options.", 1000, ["Whats your Name.", "Whats your Profession.","My Order details.","No answer"]);
   }
   closeChat() {
     $(".chatBox").hide(1000);
@@ -43,17 +43,25 @@ export class ChatbotComponent implements OnInit {
   }
   //-- No use time. It is a javaScript effect.
   requested(who, text, time: any = 0) {
-    var that= this;
-    this.insertChat(who,text,time);
-    if(text==="Your Name?"){
-      this.insertChat("bot","I AM your Personal Bot",1000);
+    var that = this;
+    this.insertChat(who, text+"?", time);
+    this.msgInput = false;
+    switch (text) {
+      case "Whats your Name.":
+        this.insertChat("bot", "I AM your Personal Bot", 1000);
+        break;
+      case "Whats your Profession.":
+        this.insertChat("bot", "Helping you.. :-)", 1000);
+        break;
+      case "My Order details.":
+          this.insertChat("bot", "Please enter Order Number", 1000);
+          this.msgInput = true;
+          break;
+      default:
+        this.insertChat("bot", "I cant find that please choose bellow", 1000, ["Whats your Name.", "Whats your Profession.","My Order details."]);
     }
-    if(text=="Your Profession?"){
-      this.insertChat("bot","Helping you.. :-)",1000);
-    }
-    
   }
-  insertChat(who, text, time: any = 0) {
+  insertChat(who, text, delay: any = 0, questions = null) {
     var control = "";
     var date = this.formatAMPM(new Date());
     let that = this;
@@ -63,14 +71,19 @@ export class ChatbotComponent implements OnInit {
         if (who == "me") {
           that.chatMsgs.push({ avatar: that.me.avatar, who: "me", text: text, time: date });
         } else {
-          that.chatMsgs.push({ avatar: that.bot.avatar, who: "bot", text: text, time: date,questions:["Your Name?","Your Profession?"] });
+          if (questions && who == "bot") {
+            that.chatMsgs.push({ avatar: that.bot.avatar, who: "bot", text: text, time: date, questions: questions });
+          } else {
+            that.chatMsgs.push({ avatar: that.bot.avatar, who: "bot", text: text, time: date });
+          }
         }
+
         that.updateChatWindow();
 
-      }, time);
+      }, delay);
   }
   resetChat() {
-    this.chatMsgs=[];
+    this.chatMsgs = [];
   }
   updateChatWindow() {
     var height = $('#msg')[0].scrollHeight;

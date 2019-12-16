@@ -22,7 +22,7 @@
             <div class="text text-l">
               <p> {{msg.text}} </p>
               <div *ngIf="msg.questions">
-                  <a *ngFor="let question of msg.questions" class="btn" href="#" (click)="requested('me',question,100)" role="button">{{question}}</a>
+                  <a *ngFor="let question of msg.questions" class="btn pull-left" href="#" (click)="requested('me',question,100)" role="button">{{question}}</a>
               </div>
               <p><small> {{msg.time}} </small></p>
             </div>
@@ -37,8 +37,8 @@
       
       </div>
     </div> -->
-    <div class="text text-r" style="background:whitesmoke !important">
-      <input class="mytext" placeholder="Type a message" (keyup.enter)="onKey($event)" />
+    <div class="text text-r" style="background:whitesmoke !important"  *ngIf="msgInput">
+        <input class="mytext" placeholder="Type a message" (keyup.enter)="onKey($event)" />
     </div>
   </div>
 
